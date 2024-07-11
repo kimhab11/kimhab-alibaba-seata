@@ -1,0 +1,64 @@
+spring:
+#  cloud:
+#    nacos:
+#      config:
+#        username: nacos
+#        password: nacos
+#        server-addr: 127.0.0.1:8848
+#      discovery:
+#        server-addr: 127.0.0.1:8848
+#        username: nacos
+#        password: nacos
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+   #   ddl-auto: create-drop update
+      ddl-auto: update
+    show-sql: true
+  application:
+    name: kimhab-alibaba-seata-server
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3307/seata_demo
+    username: myuser
+    password: mypassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8080
+#seata:
+#  tx-service-group: default
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: tx-test-group
+  service:
+    grouplist:
+      default: 127.0.0.1:8091
+    vgroup-mapping:
+      tx-test-group: default
+  #use-quick-login: true
+#  enable-auto-data-source-proxy: true
+
+  config:
+    type: file
+  registry:
+    type: file
+#    type: nacos
+#    nacos:
+#      namespace:
+#      server-addr: 127.0.0.1:8848
+#      group: DEFAULT_GROUP
+#      username: nacos
+#      password: nacos
+#  registry:
+#    type: nacos
+#    nacos:
+#      application: seata-server
+#      server-addr: 127.0.0.1:8848
+#      group: DEFAULT_GROUP
+#      username: nacos
+#      password: nacos
+logger:
+  root:
+    level: DEBUG
